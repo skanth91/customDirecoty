@@ -3,10 +3,10 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
 import { AppConfig } from "./app.config.service";
 
 @Directive({
-    selector: '[featureFlagConfig]'
+    selector: '[dirAttrConfig]'
   })
-  export class FeatureFlagDirective {
-    @Input() featureFlagConfig: string | string[];
+  export class DirAttribDirective {
+    @Input() dirAttrConfig: string | string[];
     private httpClient: HttpClient;
     constructor(
       private vcr: ViewContainerRef,
@@ -21,9 +21,6 @@ import { AppConfig } from "./app.config.service";
         try{
           var remoteConfig = await this.httpClient
           .get<AppConfig>("assets/config.json").toPromise();
-    
-          console.log(remoteConfig.featureFlag.enabled)
-          console.log(this.featureFlagConfig)
           if (remoteConfig.featureFlag.enabled == this.featureFlagConfig) {
             this.vcr.createEmbeddedView(this.tpl);
           }
