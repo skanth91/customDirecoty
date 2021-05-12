@@ -21,7 +21,7 @@ import { AppConfig } from "./app.config.service";
         try{
           var remoteConfig = await this.httpClient
           .get<AppConfig>("assets/config.json").toPromise();
-          if (remoteConfig.featureFlag.enabled == this.featureFlagConfig) {
+          if (remoteConfig.featureFlag.enabled == this.dirAttrConfig) {
             this.vcr.createEmbeddedView(this.tpl);
           }
           
